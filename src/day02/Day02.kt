@@ -1,9 +1,8 @@
-package day2
+package day02
 
 import AdventOfCode
 import println
 import readInput
-import kotlin.math.max
 
 fun main() {
     data class GameRecord(val id: Int, val sets: Map<String, Int>)
@@ -19,6 +18,8 @@ fun main() {
             processed.mapIndexed { index, strings ->
                 strings.map {
                     val (count, color) = it.trim().split(" ")
+
+                    // Prepend bogus index to bypass unique key constraint of maps
                     sets.put("$index$color", count.toInt())
                 }
             }
@@ -27,9 +28,9 @@ fun main() {
         }
 
         override fun part1(input: List<String>): Int {
-            val totalGames = input.toGameRecords()
+            val gameRecords = input.toGameRecords()
 
-            return totalGames.filter { game ->
+            return gameRecords.filter { game ->
                 game.sets.all { (colorCode, score) ->
                     val color = colorCode.substring(1)
                     when (color) {
@@ -42,29 +43,18 @@ fun main() {
             }.sumOf { it.id }
         }
 
+        private fun GameRecord.maxOf(color: String): Int = sets.maxOf { (c, count) ->
+            // Substring from second character to drop the bogus index
+            if (color == c.substring(1)) count else 0
+        }
+
         override fun part2(input: List<String>): Int {
-            val totalGames = input.toGameRecords()
-
-            return totalGames.sumOf { game ->
-                var maxRed = 0
-                var maxGreen = 0
-                var maxBlue = 0
-
-                game.sets.forEach { (t, count) ->
-                    val color = t.substring(1)
-
-                    when (color) {
-                        "red" -> maxRed = max(maxRed, count)
-                        "green" -> maxGreen = max(maxGreen, count)
-                        "blue" -> maxBlue = max(maxBlue, count)
-                    }
-                }
-
-                maxRed * maxGreen * maxBlue
+            return input.toGameRecords().sumOf { game ->
+                game.maxOf("red") * game.maxOf("green") * game.maxOf("blue")
             }
         }
     }
 
-    val input = readInput("day2/Day02_test")
-    dayTwo.part1(input).println()
+    val input = readInput("day02/Day02")
+    dayTwo.part2(input).println()
 }
