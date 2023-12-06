@@ -1,9 +1,9 @@
 package day01
 
-import AdventOfCode
+import Solution
 
 fun main() {
-    val adventOfCodeOne = object : AdventOfCode {
+    val solutionOne = object : Solution {
         override fun part1(input: List<String>): Int {
             return input.map { text ->
                 "${text.first(Char::isDigit)}${text.reversed().first(Char::isDigit)}"

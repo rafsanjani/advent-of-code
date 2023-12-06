@@ -19,12 +19,12 @@ fun main() {
     val fileContents = """
         package day$currentDay
     
-        import AdventOfCode
+        import Solution
         import println
         import readInput
     
         fun main() {
-            val solution = object : AdventOfCode {
+            val solution = object : Solution {
                 override fun part1(input: List<String>): Int {
                     TODO("Not yet implemented")
                 }
@@ -46,5 +46,6 @@ fun main() {
         }
         resolve("Day${currentDay}_test.txt").createFile()
         resolve("Day$currentDay.txt").createFile()
+        resolve("problem.txt").createFile()
     }
 }

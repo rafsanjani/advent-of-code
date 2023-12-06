@@ -1,11 +1,11 @@
 package day03
 
-import AdventOfCode
+import Solution
 import println
 import readInput
 
 fun main() {
-    val dayThree = object : AdventOfCode {
+    val dayThree = object : Solution {
         fun getNumber(lines: String, index: Int): Int? {
             // If the index is out of bounds or does not contain a digit, return null.
             if (index !in lines.indices || !lines[index].isDigit()) return null

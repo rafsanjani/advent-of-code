@@ -1,13 +1,13 @@
 package day02
 
-import AdventOfCode
+import Solution
 import println
 import readInput
 
 fun main() {
     data class GameRecord(val id: Int, val sets: Map<String, Int>)
 
-    val dayTwo = object : AdventOfCode {
+    val dayTwo = object : Solution {
         fun List<String>.toGameRecords(): List<GameRecord> = mapIndexed { gameIndex, input ->
             val processed = input.substringAfter(":").split(";").map {
                 it.split(",")

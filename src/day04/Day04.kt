@@ -1,6 +1,6 @@
 package day04
 
-import AdventOfCode
+import Solution
 import println
 import readInput
 import kotlin.math.pow
@@ -10,7 +10,7 @@ fun main() {
         val winnings: Set<Int> get() = scratchCards.intersect(picks.toSet())
     }
 
-    val solution = object : AdventOfCode {
+    val solution = object : Solution {
         fun parseInput(input: List<String>): List<Card> = input.mapIndexed { index, line ->
             val (picks, scratchCards) = line.substringAfter(": ")
                 .split("|")
